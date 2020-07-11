@@ -13,5 +13,4 @@ public class BoxWithNumbersTest {
         double avg = box.getAvg();
         Assert.assertTrue(1.5 == avg);
     }
-
 }
