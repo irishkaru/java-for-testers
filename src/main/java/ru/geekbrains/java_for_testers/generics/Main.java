@@ -15,7 +15,12 @@ public class Main {
                 new ArrayList<Number>(Arrays.asList(10, 20, 30));
         List<Integer> integerList =
                 new ArrayList<>(Arrays.asList(100, 200, 300));
+
+        System.out.println(numberList);
+
         Collections.copy(numberList, integerList);
+
+        System.out.println(numberList);
 
 
     }
