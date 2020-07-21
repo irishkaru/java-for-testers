@@ -144,7 +144,7 @@ class WorkerToCRVTest {
     @Test
     void readFileWithAnotherSeparator() {
         //Проверка работы с другим разделителем
-        String filename = "test8.txt";
+        String filename = "src/test/resources/test8.txt";
         WorkerToCRV file = new WorkerToCRV(filename,',');
 
         AppData appData = file.readFile();
