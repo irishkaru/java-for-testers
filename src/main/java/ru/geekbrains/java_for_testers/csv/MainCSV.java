@@ -2,7 +2,7 @@ package ru.geekbrains.java_for_testers.csv;
 
 import java.util.Arrays;
 
-public class Main {
+public class MainCSV {
 
     public static void main(String[] args) {
         //1. Сохранить данные в csv файл
@@ -17,14 +17,14 @@ public class Main {
         DataOut.setData(data);
 
         // Сохранить данные в csv файл
-        String filenameOut = "test1.txt";
-        WorkerToCRV fileOut = new WorkerToCRV(filenameOut);
+        String filenameOut = "src/test/resources/test1.txt";
+        WorkerToCSV fileOut = new WorkerToCSV(filenameOut);
         fileOut.save(DataOut);
 
         //2. Реализовать загрузку данных из csv файла. Файл читается целиком
-        String filenameIn = "test2.txt";
+        String filenameIn = "src/test/resources/test2.txt";
 
-        WorkerToCRV fileIn = new WorkerToCRV(filenameIn);
+        WorkerToCSV fileIn = new WorkerToCSV(filenameIn);
 
         AppData DataIn = fileIn.readFile();
         System.out.println(Arrays.deepToString(DataIn.getHeader()));

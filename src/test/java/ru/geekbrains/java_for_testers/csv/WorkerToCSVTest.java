@@ -5,14 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class WorkerToCRVTest {
+class WorkerToCSVTest {
     ////////////////Тесты на сохранение в файл//////////////////////////////////////////////
     @Test
     void saveNullFile() {
         //Пустой значения
-        String filename = "test.txt";
+        String filename = "src/test/resources/test.txt";
         //Данные
         String[] header = {};
         int[][] data = new int[][]{};
@@ -22,14 +20,14 @@ class WorkerToCRVTest {
         DataOut.setData(data);
 
 
-        WorkerToCRV fileOut = new WorkerToCRV(filename,'|');
+        WorkerToCSV fileOut = new WorkerToCSV(filename,'|');
         fileOut.save(DataOut);
     }
 
     @Test
     void saveFileWithAnotherSeparator() {
         //Проверка сепаратора
-        String filename = "test.txt";
+        String filename = "src/test/resources/test.txt";
         //Данные
         String[] header = {"Value 1", "Value 2", "Value 3"};
         int[][] data = new int[][]{
@@ -41,13 +39,13 @@ class WorkerToCRVTest {
         DataOut.setData(data);
 
 
-        WorkerToCRV fileOut = new WorkerToCRV(filename,'|');
+        WorkerToCSV fileOut = new WorkerToCSV(filename,'|');
         fileOut.save(DataOut);
     }
 
     @Test
     void saveFileWithoutHeader() {
-        String filename = "test.txt";
+        String filename = "src/test/resources/test.txt";
         //Данные
         String[] header = {};
         int[][] data = new int[][]{
@@ -59,13 +57,13 @@ class WorkerToCRVTest {
         DataOut.setData(data);
 
 
-        WorkerToCRV fileOut = new WorkerToCRV(filename,'|');
+        WorkerToCSV fileOut = new WorkerToCSV(filename,'|');
         fileOut.save(DataOut);
     }
 
     @Test
     void saveFileWithoutData() {
-        String filename = "test.txt";
+        String filename = "src/test/resources/test.txt";
         //Данные
         String[] header = {"Value 1", "Value 2", "Value 3"};
         int[][] data = new int[][]{};
@@ -76,7 +74,7 @@ class WorkerToCRVTest {
         DataOut.setData(data);
 
 
-        WorkerToCRV fileOut = new WorkerToCRV(filename,'|');
+        WorkerToCSV fileOut = new WorkerToCSV(filename,'|');
         fileOut.save(DataOut);
     }//Результат пустой
 
@@ -84,9 +82,9 @@ class WorkerToCRVTest {
     @Test
     void readNullFile() {
         //Пустой файл
-        String filename = "test3.txt";
+        String filename = "src/test/resources/test3.txt";
 
-        WorkerToCRV file = new WorkerToCRV(filename);
+        WorkerToCSV file = new WorkerToCSV(filename);
         AppData appData = file.readFile();
         Assert.assertNull(appData.getHeader());
         Assert.assertNull(appData.getData());
@@ -96,8 +94,8 @@ class WorkerToCRVTest {
     @Test
     void readFileWithHeader() {
         //Header без зачений
-        String filename = "test4.txt";
-        WorkerToCRV file = new WorkerToCRV(filename);
+        String filename = "src/test/resources/test4.txt";
+        WorkerToCSV file = new WorkerToCSV(filename);
 
         AppData appData = file.readFile();
         Assert.assertNotNull(appData.getHeader());
@@ -109,8 +107,8 @@ class WorkerToCRVTest {
     @Test
     void readFileWithError() {
         //строки со значением заполнены буквами
-        String filename = "test5.txt";
-        WorkerToCRV file = new WorkerToCRV(filename);
+        String filename = "src/test/resources/test5.txt";
+        WorkerToCSV file = new WorkerToCSV(filename);
 
         try {
             AppData appData = file.readFile();
@@ -123,8 +121,8 @@ class WorkerToCRVTest {
     @Test
     void readFileWithStrangeValue() {
         //Значений больше чем заголовков
-        String filename = "test6.txt";
-        WorkerToCRV file = new WorkerToCRV(filename);
+        String filename = "src/test/resources/test6.txt";
+        WorkerToCSV file = new WorkerToCSV(filename);
 
         AppData appData = file.readFile();
         System.out.println(Arrays.deepToString(appData.getHeader()));
@@ -134,8 +132,8 @@ class WorkerToCRVTest {
     @Test
     void readFileWithStrangeHeader() {
         //Значений меньше чем заголовков
-        String filename = "test7.txt";
-        WorkerToCRV file = new WorkerToCRV(filename);
+        String filename = "src/test/resources/test7.txt";
+        WorkerToCSV file = new WorkerToCSV(filename);
 
         AppData appData = file.readFile();
         System.out.println(Arrays.deepToString(appData.getHeader()));
@@ -144,8 +142,8 @@ class WorkerToCRVTest {
     @Test
     void readFileWithAnotherSeparator() {
         //Проверка работы с другим разделителем
-        String filename = "test8.txt";
-        WorkerToCRV file = new WorkerToCRV(filename,',');
+        String filename = "src/test/resources/test8.txt";
+        WorkerToCSV file = new WorkerToCSV(filename,',');
 
         AppData appData = file.readFile();
         System.out.println(Arrays.deepToString(appData.getHeader()));
@@ -155,8 +153,8 @@ class WorkerToCRVTest {
     @Test
     void readFileWithoutHeader() {
         //без заголовка
-        String filename = "test9.txt";
-        WorkerToCRV file = new WorkerToCRV(filename);
+        String filename = "src/test/resources/test9.txt";
+        WorkerToCSV file = new WorkerToCSV(filename);
         AppData appData = file.readFile();
 
         System.out.println(Arrays.deepToString(appData.getHeader()));

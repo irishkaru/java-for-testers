@@ -13,17 +13,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class WorkerToCRV {
+public class WorkerToCSV {
     private String filename;
     private char SEPARATOR;
     private final char DEFAULT_SEPARATOR = ';';
 
-    public WorkerToCRV(String filename) {
+    public WorkerToCSV(String filename) {
         this.SEPARATOR = DEFAULT_SEPARATOR;
         this.filename = filename;
     }
 
-    public WorkerToCRV(String filename, char SEPARATOR) {
+    public WorkerToCSV(String filename, char SEPARATOR) {
         this.SEPARATOR = SEPARATOR;
         this.filename = filename;
     }
