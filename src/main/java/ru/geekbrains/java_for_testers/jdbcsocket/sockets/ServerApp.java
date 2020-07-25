@@ -12,7 +12,7 @@ public class ServerApp {
 
     public static void main(String[] args) {
 
-        while (true) {
+       // while (true) {
             try (ServerSocket serverSocket = new ServerSocket(6666)) { //создаем Сервер соке на порту 6666
                 Socket client = serverSocket.accept(); //подключаем клиентский сокет(подключается клиент)
                 //Если не будет подключения программа дальше не пойдет
@@ -29,7 +29,7 @@ public class ServerApp {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+      //  }
 
     }
 //здесь мы написали серверную часть
