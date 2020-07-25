@@ -69,6 +69,25 @@ public class Main {
         System.out.println("Вес второй коробки с яблоками " + appleBox2.getWeightBox());
         System.out.println("Вес коробки с яблоками " + appleBox.getWeightBox());
 
+        ////////////////////////////////////////////////
+        ////Как видим при нашей структуре
+        ///Мы можем сделать общую коробку с фруктами
+        ///и положить туда и яблоки и апельсины
+        BoxWithFruit<Fruit> withFruitBox = new BoxWithFruit<>();
+
+        //Добавляем яблоки в коробку
+        withFruitBox.addFruit(new Orange());
+        withFruitBox.addFruit(new Apple());
+        /////чтобы это исправить (если надо) надо:
+        /////Сделать интерфейс Н: Packable (пустой) так называемый маркерный интерфейс
+        ////В BoxWithFruit добавляем
+        ///public class BoxWithFruit<T extends Fruit & Packable>
+        ///и помечаем интерфейсом классы Apple и Orange
+        ///public class Apple extends Fruit implements Packable{
+        ///public class Orange extends Fruit implements Packable{
+        ///теперь в коробку не сможем положить и то и другое
+
+
     }
 
     public static void changeElements(Object[] array, int index1, int index2) {

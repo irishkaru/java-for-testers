@@ -1,7 +1,8 @@
 package ru.geekbrains.java_for_testers.fruit;
 
 public abstract class Fruit {
-    private float weight;
+
+    protected float weight; //не private т.к.
 
     public Fruit(float weight) {
         this.weight = weight;
