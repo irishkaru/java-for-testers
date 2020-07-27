@@ -9,12 +9,16 @@ import java.time.ZoneId;
 import java.util.Scanner;
 
 public class Server {
+    private static int PORT;
 
-    public static void main(String[] args) {
+    public Server(int PORT) {
+        this.PORT = PORT;
+    }
 
-        // while (true) {
+    public static void run() {
+
         try (Scanner scanner = new Scanner(System.in);
-             ServerSocket serverSocket = new ServerSocket(6666)) { //создаем Сервер соке на порту 6666
+             ServerSocket serverSocket = new ServerSocket(PORT)) { //создаем Сервер соке на порту 6666
             Socket client = serverSocket.accept(); //подключаем клиентский сокет(подключается клиент)
             //Если не будет подключения программа дальше не пойдет
             System.out.println("Client connected!");
@@ -29,7 +33,7 @@ public class Server {
 
                 if (in.available() > 0) {
                     String clientResponse = in.readUTF();
-                    message(clientResponse);
+                    saveMessage(clientResponse);
                     System.out.println("Client:" + clientResponse);
                 }
                 long end = System.currentTimeMillis() + 60 * 10;
@@ -40,13 +44,13 @@ public class Server {
                                 Instant.now().atZone(ZoneId.of("Europe/Moscow")));
                 }
             }
-//здесь мы написали серверную часть
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-     static void message(String text){
+     static void saveMessage(String text){
 
         Connection connection;
         Statement statement;
@@ -80,6 +84,9 @@ public class Server {
             throwables.printStackTrace();
         }
     }
-
+    public static void main(String[] args) {
+        Server server = new Server(5080);
+        server.run();
+    }
 
 }

@@ -8,11 +8,16 @@ import java.util.Scanner;
 
 public class Client {
 
-    public static void main(String[] args) {
+    private static int PORT;
 
+    public Client(int PORT) {
+        this.PORT = PORT;
+    }
 
-        try (Scanner scanner = new Scanner(System.in); //добавляем для возможность ввода с клавиатуры
-             Socket socket = new Socket("localhost", 6666)) { //"localhost" - если клиент и сервер на одной машине
+    public static void run() {
+
+        try (Scanner scanner = new Scanner(System.in);
+             Socket socket = new Socket("localhost", PORT)) {
 
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             DataInputStream in = new DataInputStream(socket.getInputStream());
@@ -39,6 +44,9 @@ public class Client {
         }
     }
 
-
+    public static void main(String[] args) {
+        Client client = new Client(5080);
+        client.run();
+    }
 
 }
