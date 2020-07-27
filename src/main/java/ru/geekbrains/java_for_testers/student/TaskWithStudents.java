@@ -1,42 +1,43 @@
 package ru.geekbrains.java_for_testers.student;
 
+import ru.geekbrains.java_for_testers.io.Person;
 import ru.geekbrains.java_for_testers.streamapi.ExampleApp;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TaskWithStudents {
 
     //1. Написать функцию, принимающую список Student и возвращающую список уникальных курсов,
     //на которые подписаны студенты
-    public Stream<String> uniqCourses(Stream<Student> studentStream) {
-        return studentStream
+    public List<Course> uniqCourses(List<Student> studentStream) {
+        return studentStream.stream()
                 .map(x -> x.getAllCourses())
                 .flatMap(x -> x.stream())
-                .map(course -> course.getName())
-                .distinct();
+                .distinct()
+                .collect(Collectors.toList());
     }
 
 
     //2. Написать функцию, принимающую на вход список Student и возвращающую список из трех самых любознательных
     //(любознательность определяется количеством курсов)
-    public Stream<String> inquiringStudents(Stream<Student> studentStream) {
-        return studentStream
+    public List<Student> inquiringStudents(List<Student> studentStream) {
+        return studentStream.stream()
               .sorted(Comparator.comparing(p -> p.getAllCourses().size(), Comparator.reverseOrder()))
                 .limit(3)
-                .map(student -> student.getName());
+                .collect(Collectors.toList());
 
     }
 
 
     //3. Написать функцию, принимающую на вход список Student и экземпляр Course, возвращающую список студентов,
     // которые посещают этот курс
-
-    public Stream<String> listStudentsOnCourse(Stream<Student> studentStream, String course) {
-        return studentStream
+    public List<Student> listStudentsOnCourse(List<Student> studentStream, Course course) {
+        return studentStream.stream()
                 .filter(p -> p.getAllCourses().contains(course))
-                .map(student -> student.getName());
+                .collect(Collectors.toList());
     }
 
 //////////////////////////////////////////////////////////
