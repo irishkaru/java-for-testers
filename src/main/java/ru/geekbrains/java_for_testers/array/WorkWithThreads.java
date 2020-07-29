@@ -52,7 +52,8 @@ public class WorkWithThreads {
         //заполнение единицами
         Arrays.fill(arr, 1.0f);
 
-        changeValuesInArray(arr,SIZE);
+        changeValuesInArray(arr,SIZE,0);
+        System.out.println(arr[0]+" "+arr[HALF-1]+" "+arr[HALF]+" "+arr[HALF-1]+" "+arr[SIZE-1]);
     }
 
     public static void secondMethod() {
@@ -74,8 +75,8 @@ public class WorkWithThreads {
         System.out.println("Время разбивки: " + (System.currentTimeMillis() - time));
 
         //Потоки
-        Thread thread1 = new Thread(() ->changeValuesInArray(arr1,HALF));
-        Thread thread2 = new Thread(() ->changeValuesInArray(arr2,HALF));
+        Thread thread1 = new Thread(() ->changeValuesInArray(arr1,HALF,0));
+        Thread thread2 = new Thread(() ->changeValuesInArray(arr2,HALF,HALF));
 
         thread1.start();
         thread2.start();
@@ -91,12 +92,13 @@ public class WorkWithThreads {
         System.arraycopy(arr1, 0, arr, 0, HALF);
         System.arraycopy(arr2, 0, arr, HALF, HALF);
         System.out.println("Время склейки: " + (System.currentTimeMillis() - time2));
+        System.out.println(arr[0]+" "+arr[HALF-1]+" "+arr[HALF]+" "+arr[HALF-1]+" "+arr[SIZE-1]);
     }
 
-    public static synchronized void changeValuesInArray(float[] arr,int size) {
+    public static synchronized void changeValuesInArray(float[] arr,int size,int num) {
         long time = System.currentTimeMillis();
         for (int i = 0; i < size; i++) {
-            arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+            arr[i] = (float) (arr[i] * Math.sin(0.2f + (i + num) / 5) * Math.cos(0.2f + (i + num) / 5) * Math.cos(0.4f + (i + num) / 2));
         }
         System.out.println("Время расчета значений: " + (System.currentTimeMillis() - time));
 
