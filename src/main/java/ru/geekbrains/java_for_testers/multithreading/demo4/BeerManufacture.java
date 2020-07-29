@@ -16,15 +16,19 @@ public class BeerManufacture {
         return bottleCount;
     }
 
-    public synchronized void addBeerToBottle(long count) {
+    public synchronized void addBeerToBottle(long count) { //синхронизация метода
         this.bottleCount += count;
     }
 
-    public synchronized void pourOutBeerFromBottles(long count) {
-        this.bottleCount -= count;
+    public void pourOutBeerFromBottles(long count) {
+        synchronized (this) { //синхронизация блока
+            this.bottleCount -= count;
+        }
     }
 
-    public static synchronized void doSomethingElse() {
-        System.out.println("something else");
+    public static void doSomethingElse() {
+        synchronized (BeerManufacture.class) { //синхронизация блока в статическом методе
+            System.out.println("something else");
+        }
     }
 }
