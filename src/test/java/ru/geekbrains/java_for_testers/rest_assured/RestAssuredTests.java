@@ -47,6 +47,18 @@ public class RestAssuredTests {
                 .statusCode(200);
     }
 
+    @Test
+    public void testAddItem() {
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .spec(baseSpec)
+                .body("{\"id\": \"2\",\"title\": \"Clock\"}")
+                .put("/items")
+                .then()
+                .body("title", equalTo("Clock"));
+    }
+
 
 }
 //ЗДЕСЬ ИЗМЕНЕНИЯ В MATHCONTROLLER
